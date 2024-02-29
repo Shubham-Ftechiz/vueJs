@@ -1,16 +1,18 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 defineProps({
   msg: String,
 })
+
+const name= ref("Testing")
 
 const count = ref(0)
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
-  <h2>{{ nameMsg }}</h2>
+  <h2>{{ name }}</h2>
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
