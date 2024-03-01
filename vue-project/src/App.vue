@@ -4,6 +4,7 @@ import { ref, onMounted, computed, watch } from 'vue'
 // onMounted - when we first render the page
 // computed - computed the order we created
 // watch - watch any changes in the reference
+// deep - check every element of array of object if any key change then it will call watch
 
 const todos = ref([])
 const name = ref('')
@@ -19,11 +20,24 @@ watch(name,(newVal)=>{
   localStorage.setItem("name", newVal)
 })
 
+watch(todos,(newVal)=>{
+  localStorage.setItem("todos", JSON.stringify(newVal))
+})
+
 onMounted(()=>{
   name.value = localStorage.getItem("name") || ''
 })
 
 const addTodo = () => {
+  if(input_content.value.trim() === '' || input_content.value === null){
+    return
+  }
+  todos.value.push({
+    content: input_content.value,
+    category: input_contegory.value,
+    done: false,
+    createdAt: new Date().getTime()
+  })
 }
 
 </script>
